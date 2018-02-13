@@ -140,13 +140,13 @@ public class Controller {
 
 		for(int i = 0; i < alSongList.size(); i++) {
 			Song songToBeWritten = alSongList.get(i);
-			out.write(songToBeWritten.getName());		// Write song name
+			out.write(songToBeWritten.getName());
 			out.newLine();
-			out.write(songToBeWritten.getArtist());		// and then artist
+			out.write(songToBeWritten.getArtist());	
 			out.newLine();
-			out.write(songToBeWritten.getAlbum());	// and then album
+			out.write(songToBeWritten.getAlbum());
 			out.newLine();
-			out.write(songToBeWritten.getYear());// finally release date
+			out.write(songToBeWritten.getYear());
 			out.newLine();
 
 		}
@@ -194,6 +194,7 @@ public class Controller {
 			if(tfAlbum.getText() != null || !tfAlbum.getText().isEmpty()) {
 				temp.setAlbum(tfAlbum.getText());
 			}
+			
 			boolean isNumber = true;
 			if(tfYear.getText() != null || !tfYear.getText().isEmpty()) {
 				try {
