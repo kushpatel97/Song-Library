@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -17,6 +18,7 @@ import javafx.scene.text.Text;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Controller {
 
@@ -183,20 +185,26 @@ public class Controller {
 		Alert infoAlert = new Alert(AlertType.INFORMATION);
 		Alert errorAlert = new Alert(AlertType.ERROR);
 		if(b == mAdd) {
+			if(tfName.getText().trim().equalsIgnoreCase("") || tfArtist.getText().trim().equalsIgnoreCase("")) {
+				infoAlert.setHeaderText("Invalid fields");
+				infoAlert.setContentText("Missing mandatory fields: Song Name");
+				infoAlert.showAndWait();
+				return;
+			}
 			if(tfName.getText().equalsIgnoreCase("") || tfArtist.getText().equalsIgnoreCase("") || tfName.getText().isEmpty() || tfArtist.getText().isEmpty()) {
 				infoAlert.setHeaderText("Missing Fields");
 				infoAlert.setContentText("Missing mandatory fields: Song Name and/or Song Artist");
 				infoAlert.showAndWait();
 				return;
 			}
-			Song temp = new Song(tfName.getText(), tfArtist.getText());
+			Song temp = new Song(tfName.getText().trim(), tfArtist.getText().trim());
 			
 			if(tfAlbum.getText() != null || !tfAlbum.getText().isEmpty()) {
 				temp.setAlbum(tfAlbum.getText());
 			}
 			
 			boolean isNumber = true;
-			if(tfYear.getText() != null || !tfYear.getText().isEmpty()) {
+			if(!tfYear.getText().isEmpty()) {
 				try {
 					int year = Integer.parseInt(tfYear.getText());
 				}
@@ -255,14 +263,15 @@ public class Controller {
 			tfYear.setText(songList.get(index).getYear());
 			
 			//Remove song from array list and add it back with save
-			alSongList.remove(index);
-			
+//			alSongList.remove(index);
+
+
 			System.out.println("Clicked" + b.toString());
 		}
 		else if(b == mSave) {
 			
 			int index = listview.getSelectionModel().getSelectedIndex();
-			
+			alSongList.remove(index);
 			if(tfName.getText().equalsIgnoreCase("") || tfArtist.getText().equalsIgnoreCase("") || tfName.getText().isEmpty() || tfArtist.getText().isEmpty()) {
 				infoAlert.setHeaderText("Missing Fields");
 				infoAlert.setContentText("Missing mandatory fields: Song Name and/or Song Artist");
@@ -275,7 +284,7 @@ public class Controller {
 				temp.setAlbum(tfAlbum.getText());
 			}
 			boolean isNumber = true;
-			if(tfYear.getText() != null || !tfYear.getText().isEmpty()) {
+			if(!tfYear.getText().isEmpty()) {
 				try {
 					int year = Integer.parseInt(tfYear.getText());
 				}
@@ -352,6 +361,19 @@ public class Controller {
 			}
 		}
 		else if(b == mUndo) {
+			Alert undoAlert = new Alert(AlertType.CONFIRMATION);
+			undoAlert.setContentText("Are you sure you want to undo changes?");
+			
+			Optional<ButtonType> result = undoAlert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				tfName.clear();
+				tfAlbum.clear();
+				tfArtist.clear();
+				tfYear.clear();
+			    System.out.println("OKAY");
+			} else {
+			    // ... user chose CANCEL or closed the dialog
+			}
 			System.out.println("Clicked" + b.toString());
 		}
 	}
