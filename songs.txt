@@ -6,10 +6,6 @@ Firework
 Katy Perry
 2017
 302
-Lucky
-Charms
-
-
 One Dance
 Drake
 
@@ -19,7 +15,7 @@ Drake
 yes
 
 Stairway to Heaven
-Led Zeppelin
+Led Zepelin
 
 
 Supersition
@@ -29,8 +25,4 @@ Stevie Wonder
 Thriller
 Michael Jackson
 
-
-Waves
-Kanye West
-Yeezy
 
