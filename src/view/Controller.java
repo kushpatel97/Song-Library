@@ -319,7 +319,7 @@ public class Controller {
 			}
 			
 			for(int i = 0; i < alSongList.size(); i++) {
-				if (alSongList.get(index).getName().equalsIgnoreCase(temp.getName()) && alSongList.get(index).getArtist().equalsIgnoreCase(temp.getArtist()) && (!((tfAlbum.getText().trim().equals(alSongList.get(index).getAlbum()) && tfYear.getText().trim().equals(alSongList.get(index).getYear()))))) {
+				if (alSongList.get(index).getName().equalsIgnoreCase(temp.getName()) && alSongList.get(index).getArtist().equalsIgnoreCase(temp.getArtist()) && (!((tfAlbum.getText().trim().equalsIgnoreCase(alSongList.get(index).getAlbum()) && tfYear.getText().trim().equals(alSongList.get(index).getYear()))))) {
 					continue;
 				}
 				
