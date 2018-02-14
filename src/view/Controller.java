@@ -173,19 +173,11 @@ public class Controller {
 		}
 	}
 
-//	public boolean isDuplicate(Song song) {
-//		if(alSongList.contains(song)) {
-//			return true;
-//		}
-//		return false;
-//	}
-
-
-
 	public void btnPress(ActionEvent e) {
 		Button b = (Button) e.getSource();
 		Alert infoAlert = new Alert(AlertType.INFORMATION);
 		Alert errorAlert = new Alert(AlertType.ERROR);
+		Alert confirmation = new Alert(AlertType.CONFIRMATION);
 		if(b == mAdd) {
 			if(tfName.getText().trim().equalsIgnoreCase("") || tfArtist.getText().trim().equalsIgnoreCase("")) {
 				infoAlert.setHeaderText("Invalid fields");
@@ -229,20 +221,29 @@ public class Controller {
 					return;
 				}
 			}
-			if(isNumber) {
-				alSongList.add(temp);
-				Collections.sort(alSongList);
-				alSongList.sort(null);
-				tfName.clear();
-				tfArtist.clear();
-				tfAlbum.clear();
-				tfYear.clear();
-				mSave.setVisible(false);
-				mSave.setDisable(true);
-				mUndo.setVisible(false);
-				mUndo.setDisable(true);
-				update();
+			
+			confirmation.setTitle("Confirmation Dialog");
+			confirmation.setContentText("Are you sure you want to add?");
+			
+			Optional<ButtonType> result = confirmation.showAndWait();
+			if (result.get() == ButtonType.OK){
+				if(isNumber) {
+					alSongList.add(temp);
+					Collections.sort(alSongList);
+					alSongList.sort(null);
+					tfName.clear();
+					tfArtist.clear();
+					tfAlbum.clear();
+					tfYear.clear();
+					saveOff();
+					undoOff();
+					update();
+				}
+			} else {
+			    // ... user chose CANCEL or closed the dialog
 			}
+			
+
 			listview.getSelectionModel().select(alSongList.indexOf(temp));
 
 			System.out.println("Clicked" + b.toString());
