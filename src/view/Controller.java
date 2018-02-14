@@ -341,6 +341,8 @@ public class Controller {
 			System.out.println("Clicked" + b.toString());
 		}
 		else if(b == mDelete) {
+			Alert deleteConfirmation = new Alert(AlertType.CONFIRMATION);
+			
 			if(songList.size() == 1)listview.getSelectionModel().select(0);
 			if(songList.isEmpty()) {
 				tName.setText("");
@@ -357,21 +359,30 @@ public class Controller {
 			int index = listview.getSelectionModel().getSelectedIndex();
 			int nextIndex = index + 1;
 			//================Remove Song====================
-			alSongList.remove(index);
-			update();
-			if(!alSongList.isEmpty()) {
-				if(index < alSongList.size()) {
-					listview.getSelectionModel().select(index);
+			
+			deleteConfirmation.setTitle("Confirmation Dialog");
+			deleteConfirmation.setContentText("Are you sure you want to delete?");
+
+			Optional<ButtonType> result = deleteConfirmation.showAndWait();
+			if (result.get() == ButtonType.OK){
+				alSongList.remove(index);
+				update();
+				if(!alSongList.isEmpty()) {
+					if(index < alSongList.size()) {
+						listview.getSelectionModel().select(index);
+					}
+					else if(index == alSongList.size()) {
+						listview.getSelectionModel().select(index-1);
+					}
 				}
-				else if(index == alSongList.size()) {
-					listview.getSelectionModel().select(index-1);
+				else {
+					tName.setText("");
+					tArtist.setText("");
+					tAlbum.setText("");
+					tYear.setText("");
 				}
-			}
-			else {
-				tName.setText("");
-				tArtist.setText("");
-				tAlbum.setText("");
-				tYear.setText("");
+			} else {
+			    // ... user chose CANCEL or closed the dialog
 			}
 			
 		}

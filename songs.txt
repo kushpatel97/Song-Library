@@ -1,7 +1,3 @@
-Apple
-Jacks
-
-457
 Bartier Cardiet
 Cardi B
 
@@ -21,6 +17,14 @@ Drake
 Passionfruit
 Drake
 yes
+
+Stairway to Heaven
+Led Zeppelin
+
+
+Supersition
+Stevie Wonder
+
 
 Thriller
 Michael Jackson

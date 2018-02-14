@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 
 
 
-public class Main extends Application {
+public class SongLib extends Application {
 	
 	
 	@Override
