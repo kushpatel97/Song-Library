@@ -305,7 +305,7 @@ public class Controller {
 			boolean isNumber = true;
 			if(!tfYear.getText().isEmpty()) {
 				try {
-					int year = Integer.parseInt(tfYear.getText());
+					int year = Integer.parseInt(tfYear.getText().trim());
 				}
 				catch(NumberFormatException g) {
 					Alert alert = new Alert(AlertType.ERROR);
@@ -315,7 +315,7 @@ public class Controller {
 					isNumber = false;
 					return;
 				}
-				temp.setYear(tfYear.getText());
+				temp.setYear(tfYear.getText().trim());
 			}
 			
 			for(int i = 0; i < alSongList.size(); i++) {
@@ -334,6 +334,7 @@ public class Controller {
 				tfAlbum.clear();
 				tfYear.clear();
 				update();
+				listview.getSelectionModel().select(alSongList.indexOf(temp));
 			}
 
 			
@@ -372,6 +373,7 @@ public class Controller {
 				tAlbum.setText("");
 				tYear.setText("");
 			}
+			
 		}
 		else if(b == mUndo) {
 			Alert undoAlert = new Alert(AlertType.CONFIRMATION);
