@@ -282,9 +282,6 @@ public class Controller {
 				infoAlert.showAndWait();
 				return;
 			}
-			
-			alSongList.remove(index);
-			update();
 			if(tfName.getText().trim().equalsIgnoreCase("") || tfArtist.getText().trim().equalsIgnoreCase("")) {
 				infoAlert.setHeaderText("Invalid fields");
 				infoAlert.setContentText("Missing mandatory fields: Song Name/Song Artist");
@@ -321,12 +318,14 @@ public class Controller {
 			for(int i = 0; i < alSongList.size(); i++) {
 				if(alSongList.get(i).getName().equalsIgnoreCase(temp.getName()) && alSongList.get(i).getArtist().equalsIgnoreCase(temp.getArtist()) ) {
 					errorAlert.setHeaderText("Duplicate Entries");
-					errorAlert.setContentText("Duplicate Entries");
+					errorAlert.setContentText("Duplicate Entries. Cannot change to existing song.");
 					errorAlert.showAndWait();
 					return;
 				}
 			}
 			if(isNumber) {
+				alSongList.remove(index);
+				update();
 				alSongList.add(temp);
 				alSongList.sort(null);
 				tfName.clear();
