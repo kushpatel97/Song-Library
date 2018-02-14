@@ -61,9 +61,13 @@ public class Song implements Comparable<Song> {
 	public String toString() {
 		return getName() + ":\n" + getArtist();
 	}
+	
 	@Override
 	public int compareTo(Song arg0) {
 		// TODO Auto-generated method stub
+		if (name.trim().equals(arg0.name.trim())) {
+			return artist.compareToIgnoreCase(arg0.artist);
+		}
 		return name.compareToIgnoreCase(arg0.name);
 	}
 	

@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 public class Controller {
@@ -160,6 +161,7 @@ public class Controller {
 	}
 	
 	public void update() {
+		Collections.sort(alSongList);
 		songList = FXCollections.observableArrayList(alSongList);
 		listview.setItems(songList);
 		listview.refresh();
@@ -187,7 +189,7 @@ public class Controller {
 		if(b == mAdd) {
 			if(tfName.getText().trim().equalsIgnoreCase("") || tfArtist.getText().trim().equalsIgnoreCase("")) {
 				infoAlert.setHeaderText("Invalid fields");
-				infoAlert.setContentText("Missing mandatory fields: Song Name");
+				infoAlert.setContentText("Missing mandatory fields: Song Name/Song Artist");
 				infoAlert.showAndWait();
 				return;
 			}
@@ -229,6 +231,7 @@ public class Controller {
 			}
 			if(isNumber) {
 				alSongList.add(temp);
+				Collections.sort(alSongList);
 				alSongList.sort(null);
 				tfName.clear();
 				tfArtist.clear();
@@ -272,13 +275,20 @@ public class Controller {
 			
 			int index = listview.getSelectionModel().getSelectedIndex();
 			alSongList.remove(index);
+			update();
+			if(tfName.getText().trim().equalsIgnoreCase("") || tfArtist.getText().trim().equalsIgnoreCase("")) {
+				infoAlert.setHeaderText("Invalid fields");
+				infoAlert.setContentText("Missing mandatory fields: Song Name/Song Artist");
+				infoAlert.showAndWait();
+				return;
+			}
 			if(tfName.getText().equalsIgnoreCase("") || tfArtist.getText().equalsIgnoreCase("") || tfName.getText().isEmpty() || tfArtist.getText().isEmpty()) {
 				infoAlert.setHeaderText("Missing Fields");
 				infoAlert.setContentText("Missing mandatory fields: Song Name and/or Song Artist");
 				infoAlert.showAndWait();
 				return;
 			}
-			Song temp = new Song(tfName.getText(), tfArtist.getText());
+			Song temp = new Song(tfName.getText().trim(), tfArtist.getText().trim());
 			
 			if(tfAlbum.getText() != null || !tfAlbum.getText().isEmpty()) {
 				temp.setAlbum(tfAlbum.getText());
@@ -335,23 +345,24 @@ public class Controller {
 				return;
 			}
 			int index = listview.getSelectionModel().getSelectedIndex();
+			int nextIndex = listview.getSelectionModel().getSelectedIndex();
 			alSongList.remove(index);
 			update();
 			listview.refresh();
-			if(!songList.isEmpty()) {
+			if(!alSongList.isEmpty()) {
 				if(index == 0) {
 					tName.setText(songList.get(index).name);
 					tArtist.setText(songList.get(index).artist);
 					tAlbum.setText(songList.get(index).album);
 					tYear.setText(songList.get(index).year);
 				}else {
-					listview.getSelectionModel().select(index-1);
-					tName.setText(songList.get(index-1).name);
-					tArtist.setText(songList.get(index-1).artist);
-					tAlbum.setText(songList.get(index-1).album);
-					tYear.setText(songList.get(index-1).year);
+					if(nextIndex == -1) {
+						listview.getSelectionModel().select(nextIndex);
+					}
+					else {
+						listview.getSelectionModel().select(nextIndex);
+					}	
 				}
-
 			}
 			else {
 				tName.setText("");
