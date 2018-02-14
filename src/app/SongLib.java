@@ -1,3 +1,5 @@
+// Names: Alexander Louie (asl132) & Kush Patel (khp51)
+
 package app;
 	
 import javafx.application.Application;

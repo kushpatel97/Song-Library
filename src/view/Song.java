@@ -1,3 +1,5 @@
+// Names: Alexander Louie (asl132) & Kush Patel (khp51)
+
 package view;
 
 public class Song implements Comparable<Song> {

@@ -1,3 +1,5 @@
+// Names: Alexander Louie (asl132) & Kush Patel (khp51)
+
 package view;
 
 import javafx.beans.value.ChangeListener;
