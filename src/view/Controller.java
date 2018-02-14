@@ -345,23 +345,16 @@ public class Controller {
 				return;
 			}
 			int index = listview.getSelectionModel().getSelectedIndex();
-			int nextIndex = listview.getSelectionModel().getSelectedIndex();
+			int nextIndex = index + 1;
+			//================Remove Song====================
 			alSongList.remove(index);
 			update();
-			listview.refresh();
 			if(!alSongList.isEmpty()) {
-				if(index == 0) {
-					tName.setText(songList.get(index).name);
-					tArtist.setText(songList.get(index).artist);
-					tAlbum.setText(songList.get(index).album);
-					tYear.setText(songList.get(index).year);
-				}else {
-					if(nextIndex == -1) {
-						listview.getSelectionModel().select(nextIndex);
-					}
-					else {
-						listview.getSelectionModel().select(nextIndex);
-					}	
+				if(index < alSongList.size()) {
+					listview.getSelectionModel().select(index);
+				}
+				else if(index == alSongList.size()) {
+					listview.getSelectionModel().select(index-1);
 				}
 			}
 			else {
