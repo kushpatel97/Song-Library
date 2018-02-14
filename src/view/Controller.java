@@ -202,7 +202,7 @@ public class Controller {
 			Song temp = new Song(tfName.getText().trim(), tfArtist.getText().trim());
 			
 			if(tfAlbum.getText() != null || !tfAlbum.getText().isEmpty()) {
-				temp.setAlbum(tfAlbum.getText());
+				temp.setAlbum(tfAlbum.getText().trim());
 			}
 			
 			boolean isNumber = true;
@@ -300,7 +300,7 @@ public class Controller {
 			Song temp = new Song(tfName.getText().trim(), tfArtist.getText().trim());
 			
 			if(tfAlbum.getText() != null || !tfAlbum.getText().isEmpty()) {
-				temp.setAlbum(tfAlbum.getText());
+				temp.setAlbum(tfAlbum.getText().trim());
 			}
 			boolean isNumber = true;
 			if(!tfYear.getText().isEmpty()) {
