@@ -243,7 +243,8 @@ public class Controller {
 				mUndo.setDisable(true);
 				update();
 			}
-		
+			listview.getSelectionModel().select(alSongList.indexOf(temp));
+
 			System.out.println("Clicked" + b.toString());
 		}
 		else if(b == mEdit) {
@@ -267,7 +268,6 @@ public class Controller {
 			
 			//Remove song from array list and add it back with save
 //			alSongList.remove(index);
-
 
 			System.out.println("Clicked" + b.toString());
 		}
@@ -389,8 +389,26 @@ public class Controller {
 			} else {
 			    // ... user chose CANCEL or closed the dialog
 			}
+			undoOff();
+			saveOff();
 			System.out.println("Clicked" + b.toString());
 		}
+	}
+	public void saveOn() {
+		mSave.setDisable(false);
+		mSave.setVisible(true);
+	}
+	public void saveOff() {
+		mSave.setDisable(true);
+		mSave.setVisible(false);
+	}
+	public void undoOn() {
+		mUndo.setDisable(false);
+		mUndo.setVisible(true);
+	}
+	public void undoOff() {
+		mUndo.setDisable(true);
+		mUndo.setVisible(false);
 	}
 
 
