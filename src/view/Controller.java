@@ -319,6 +319,10 @@ public class Controller {
 			}
 			
 			for(int i = 0; i < alSongList.size(); i++) {
+				if (alSongList.get(index).getName().equalsIgnoreCase(temp.getName()) && alSongList.get(index).getArtist().equalsIgnoreCase(temp.getArtist()) && (!((tfAlbum.getText().equals(alSongList.get(index).getAlbum()) && tfYear.getText().equals(alSongList.get(index).getYear()))))) {
+					continue;
+				}
+				
 				if(alSongList.get(i).getName().equalsIgnoreCase(temp.getName()) && alSongList.get(i).getArtist().equalsIgnoreCase(temp.getArtist())) {
 					errorAlert.setHeaderText("Duplicate Entries");
 					errorAlert.setContentText("Duplicate Entries. Cannot change to existing song.");
