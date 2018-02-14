@@ -274,6 +274,15 @@ public class Controller {
 		else if(b == mSave) {
 			
 			int index = listview.getSelectionModel().getSelectedIndex();
+			
+			//if no valid case changes were made
+			if (tfName.getText().trim().equals(songList.get(index).name) && tfArtist.getText().trim().equals(songList.get(index).artist) && tfAlbum.getText().trim().equals(songList.get(index).album) && tfYear.getText().trim().equals(songList.get(index).year) ) {
+				infoAlert.setHeaderText("Change Notification");
+				infoAlert.setContentText("Song identity was not changed. No valid changes were made.");
+				infoAlert.showAndWait();
+				return;
+			}
+			
 			alSongList.remove(index);
 			update();
 			if(tfName.getText().trim().equalsIgnoreCase("") || tfArtist.getText().trim().equalsIgnoreCase("")) {
