@@ -319,11 +319,13 @@ public class Controller {
 			}
 			
 			for(int i = 0; i < alSongList.size(); i++) {
-				if(alSongList.get(i).getName().equalsIgnoreCase(temp.getName()) && alSongList.get(i).getArtist().equalsIgnoreCase(temp.getArtist()) ) {
-					errorAlert.setHeaderText("Duplicate Entries");
-					errorAlert.setContentText("Duplicate Entries. Cannot change to existing song.");
-					errorAlert.showAndWait();
-					return;
+				if(alSongList.get(i).getName().equalsIgnoreCase(temp.getName()) && alSongList.get(i).getArtist().equalsIgnoreCase(temp.getArtist())) {
+					if (tfAlbum.getText().trim().isEmpty() && tfYear.getText().trim().isEmpty()) {
+						errorAlert.setHeaderText("Duplicate Entries");
+						errorAlert.setContentText("Duplicate Entries. Cannot change to existing song.");
+						errorAlert.showAndWait();
+						return;
+					}
 				}
 			}
 			if(isNumber) {
